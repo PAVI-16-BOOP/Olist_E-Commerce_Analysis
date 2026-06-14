@@ -154,7 +154,7 @@ Average delivery time: 12.5 days
 p25: 7 days   |   p50 (median): 10 days   |   p75: 16 days   |   p90: 23 days
 ```
 
-![Distribution of Order Delivery Times]()
+![Distribution of Order Delivery Times](/Visualizations/distribution_of_delivery_times.png)
 
 ### Key Findings
 - Half of all orders are delivered within 10 days — reasonable for a large e-commerce
@@ -191,7 +191,7 @@ customers showing up in the 1-star review bucket.
 2 stars:  3,151  (3.2%)
 ```
 
-![Distribution of Customer Review Scores](INSERT_IMAGE_PATH_HERE/distribution_of_review_score.png)
+![Distribution of Customer Review Scores](/Visualizations/distribution_of_review_score.png)
 
 ### Key Findings
 - The vast majority of reviews (77%) are 4 or 5 stars — customers are generally satisfied.
@@ -225,7 +225,7 @@ High (4-5):  2.8% repeat buyers
 Low (1-2):   2.4% repeat buyers
 ```
 
-![Repeat Purchase Rate by Review Group](INSERT_IMAGE_PATH_HERE/repeat_buyers_by_review_group.png)
+![Repeat Purchase Rate by Review Group](/Visualizations/repeat_buyers_by_review_group.png)
 
 ### Key Findings — and this one genuinely surprised me
 - Repeat purchase rates are **low across every group** (2.4% to 5.4%) — confirming the
@@ -333,7 +333,7 @@ At-Risk:         37,344    (~38.9%)
 Lost/Inactive:   21,938    (~22.8%)
 ```
 
-![Number of Customers by Customer Category](INSERT_IMAGE_PATH_HERE/rfm-segmentation.png)
+![Number of Customers by Customer Category](/Visualizations/rfm-segmentation.png)
 
 **Revenue share per segment:**
 ```
@@ -343,7 +343,7 @@ At-Risk:         40.06%   (R$7,120,812.50)
 Lost/Inactive:    7.76%   (R$1,406,469.20)
 ```
 
-![Percentage of Total Revenue by Customer Category](INSERT_IMAGE_PATH_HERE/rf-revenue-by-category.png)
+![Percentage of Total Revenue by Customer Category](/Visualizations/rf-revenue-by-category.png)
 
 ### Key Findings — and the most important interpretation in this whole phase for me
 This result looked surprising to me at first — "Champions" (the segment that requires
@@ -435,7 +435,7 @@ cohort** by joining cohort assignment to total customer spend.
 
 **Cohort sizes over time:**
 
-![Number of Customers by Cohort Month](INSERT_IMAGE_PATH_HERE/number-of-customers-by-cohorts.png)
+![Number of Customers by Cohort Month](/Visualizations/number-of-customers-by-cohorts.png)
 
 > **Finding:** The platform grew steadily from late 2016 through late 2017, peaking around
 > November 2017 (~7,300 new customers in that single month — the largest cohort by far),
@@ -443,7 +443,7 @@ cohort** by joining cohort assignment to total customer spend.
 
 **Revenue by cohort:**
 
-![Revenue Metrics by Cohort Month](INSERT_IMAGE_PATH_HERE/revenue-metric-by-cohorts.png)
+![Revenue Metrics by Cohort Month](/Visualizations/revenue-metric-by-cohorts.png)
 
 > **Finding:** The November 2017 cohort produced both the highest total revenue AND had the
 > highest customer count — consistent with the chart above. What I found interesting is that
@@ -455,7 +455,7 @@ cohort** by joining cohort assignment to total customer spend.
 
 **Cohort retention heatmap:**
 
-![Cohort Retention Heatmap](INSERT_IMAGE_PATH_HERE/cohort_retention_heatmap.png)
+![Cohort Retention Heatmap](/Visualizations/cohort_retention_heatmap.png)
 
 ### Key Findings
 - Retention rates across almost all cohorts are **very low — typically in the 10–40% range
@@ -490,14 +490,6 @@ adding more new ones.
   measurement on **Month 1 and Month 2** specifically — these have larger sample sizes and
   are more statistically reliable signals.
 
-### How this feeds into my next phase
-- This section is my empirical justification for the **180-day churn definition** I'm using
-  in Phase 2 — since most "return" behavior (when it happens at all) seems concentrated in
-  the first few months, 180 days is a reasonable cutoff that captures most of the meaningful
-  retention window without being too short.
-- The cohort structure here (`cohort_month`, `months_since_first_purchase`,
-  `retention_rate`) will be reused directly in my Power BI dashboard's retention heatmap
-  page (Phase 4).
 
 ---
 
@@ -513,7 +505,4 @@ adding more new ones.
 | What does RFM segmentation reveal? | "Loyal" + "At-Risk" = ~90% of revenue, both mostly one-time buyers | Core retention strategy + ML feature inputs |
 | Is retention improving over time? | No clear trend — growth is acquisition-driven | Justifies 180-day churn window |
 
-**Next phase:** Python feature engineering — building the customer-level feature table using
-`recency_days`, `frequency`, `monetary`, `avg_review_score`, `avg_delivery_days`,
-`pct_on_time`, and defining the churn label, followed by K-Means segmentation and the
-XGBoost churn model with SHAP interpretation.
+
