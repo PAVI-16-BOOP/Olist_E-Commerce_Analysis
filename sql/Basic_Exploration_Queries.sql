@@ -4,7 +4,7 @@ SELECT *
 FROM olist_order_payments_dataset;
 
 SELECT COUNT(*)
-FROM olist_order_payments_dataset;    -- 103886 orders
+FROM olist_order_payments_dataset;    -- 103886 orders s(including all the installments for an order_id)
 
 SELECT *
 FROM olist_customers_dataset ocd ;
@@ -23,7 +23,7 @@ SELECT *
 FROM olist_orders_dataset ;
 
 SELECT  COUNT(order_id)
-FROM olist_orders_dataset ;         -- 99441 total orders
+FROM olist_orders_dataset ;         -- 99441  = actual number of total orders
 
 -- No. of orders which were delivered at the time of end of data collection 
 
