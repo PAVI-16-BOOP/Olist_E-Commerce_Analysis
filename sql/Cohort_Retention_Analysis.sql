@@ -13,7 +13,8 @@ FROM olist_orders_dataset             */                                  -- MIN
 FROM olist_orders_dataset
 GROUP BY month
 ORDER BY month;*/    -- we found out that the 09/2016 , 12/2016 have very few customers = so im dropping these months 
--- also ,similarly the last 2 months and also these 2 months have no data afterwards , so they can never show retention = so im dropping these months 
+-- also ,similarly the last 2 months  have no data afterwards as well none of the orders there have been delivered and
+-- over that we have very few orders in those 2 months (20 orders),  so they can never show retention = so im dropping these months as well 
 
 -- Assigning cohorts ( by month of first purchase)
 
