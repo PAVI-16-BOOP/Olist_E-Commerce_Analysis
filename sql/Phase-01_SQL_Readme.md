@@ -1,4 +1,4 @@
-# Phase 1: SQL Analysis — Product & Customer Intelligence System
+# Phase 1: SQL Analysis — Customer Intelligence System
 
 This readme covers the SQL  phase of my project. Before touching Python or
 any ML model, my goal here was simple: **understand the business through the data first**.
