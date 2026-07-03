@@ -116,7 +116,7 @@ chart readable, plus a separate zoomed-in look at just the top 1% of orders.
 - Most orders sit in the **R$50–R$250** range — the distribution is heavily right-skewed, with a
   long tail of expensive orders.
 
-![Order Value Distribution for Top 99 percentile by order value](../Visualizations/EDA_and_Feature_Engineering_Plots/Order Value Distribution (capped at 99th percentile).png)
+![Order Value Distribution](../Visualizations/EDA_and_Feature_Engineering_Plots/Order%20Value%20Distribution%20%28capped%20at%2099th%20percentile%29.png)
   
 - The top 1% of orders (967 orders) are mostly clustered in the R$1,000–R$2,500 range, with only
   a handful of extreme outliers — a single order over R$13,000, and only 17 orders above R$4,000.
@@ -124,6 +124,9 @@ chart readable, plus a separate zoomed-in look at just the top 1% of orders.
   customers are, on the whole, satisfied ones. But digging into the ones who gave lower scores
   showed that **even the low-review high-value orders generate meaningful total revenue**, so
   they shouldn't be ignored just because they're a minority.
+  
+![Top 1% Order Values Distribution](../Visualizations/EDA_and_Feature_Engineering_Plots/Top%201%25%20Order%20Values%20Distribution.png)
+
 
 ### Business Interpretation
 This dataset effectively has two different kinds of customers layered on top of each other:
@@ -143,7 +146,7 @@ data:
 5 star: 10.2 avg delivery days
 ```
 
-![Average Delivery Time by Review Score](eda_delivery_vs_review.png)
+![Delivery vs Review](../Visualizations/EDA_and_Feature_Engineering_Plots/eda_delivery_vs_review.png)
 
 ### Key Findings
 - There's a clean, monotonic relationship: every step up in review score corresponds to a
@@ -292,7 +295,7 @@ The 3 RFM dimensions were compressed to 2D with PCA for plotting purposes (captu
 the variance — good enough to trust the general shape, though some cluster separation that
 exists in the full 3D space gets visually compressed away).
 
-![Customer Segments Visualized via PCA](kmeans_clusters_pca.png)
+![K-Means PCA](../Visualizations/EDA_and_Feature_Engineering_Plots/kmeans_clusters_pca.png)
 
 ### Key Findings
 - **Active Casual Customers (54% of customers) generate 44% of revenue** — the single biggest
@@ -350,6 +353,8 @@ Three models — Logistic Regression, Random Forest, and XGBoost — were traine
 feature set (`total_orders`, `total_spend`, `avg_order_value`, `avg_review_score`,
 `avg_delivery_days`, `pct_on_time`, `num_categories`, `customer_age_days`,
 `has_repeat_orders`, `avg_days_between_orders`).
+
+![ROC Curves](../Visualizations/EDA_and_Feature_Engineering_Plots/roc_curves.png)
 
 > **The leakage catch, revisited:** The very first version of this model scored an AUC close to
 > **1.0** — a huge red flag, since a real-world churn model should never be that good. Digging in
@@ -447,8 +452,10 @@ the outcome toward or away from "churn."
 
 **6.2 — SHAP summary plots for both the baseline and tuned models**
 
-![SHAP Summary Plot — Baseline Model](shap_summary_baseline.png)
-![SHAP Summary Plot — Tuned Model](shap_summary_tuned.png)
+![SHAP Initial Model](../Visualizations/EDA_and_Feature_Engineering_Plots/SHAP%20Plot%20for%20the%20initial%20model.png)
+
+![SHAP Tuned Model](../Visualizations/EDA_and_Feature_Engineering_Plots/SHAP%20Plot%20for%20the%20tuned%20model.png)
+
 
 **6.3 — Individual customer explanations (waterfall plots)**
 Rather than picking extreme outliers, representative customers were selected from the top and
