@@ -1,4 +1,4 @@
-# 🛍️ Product & Customer Intelligence System
+# 🛍️ E-Commerce Customer Intelligence System
 **End-to-end e-commerce analytics | SQL · Python · Power BI · XGBoost · SHAP**
 
 ---
