@@ -116,7 +116,7 @@ chart readable, plus a separate zoomed-in look at just the top 1% of orders.
 - Most orders sit in the **R$50–R$250** range — the distribution is heavily right-skewed, with a
   long tail of expensive orders.
 
-![Order Value Distribution for Top 99 percentile by order value]()
+![Order Value Distribution for Top 99 percentile by order value](../Visualizations/EDA_and_Feature_Engineering_Plots/Order Value Distribution (capped at 99th percentile).png)
   
 - The top 1% of orders (967 orders) are mostly clustered in the R$1,000–R$2,500 range, with only
   a handful of extreme outliers — a single order over R$13,000, and only 17 orders above R$4,000.
