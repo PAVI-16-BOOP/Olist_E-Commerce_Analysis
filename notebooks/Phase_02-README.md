@@ -1,6 +1,6 @@
 # Phase 2: Python Analysis — Feature Engineering, Segmentation & Churn Prediction
 
-This document covers the Python phase of the project — everything that happens after the SQL
+This covers the Python phase of the project — everything that happens after the SQL
 exploration. The SQL phase told us *what's true* about the business (low repeat-purchase rate,
 revenue concentration, delivery time mattering). This phase turns those findings into a
 **customer-level dataset**, then uses that dataset for two things: **unsupervised segmentation**
@@ -272,7 +272,7 @@ units.
 Both the **elbow method** (inertia vs. K) and **silhouette score** were computed for K = 2
 through 10.
 
-![Elbow Method and Silhouette Score](kmeans_optimal_k.png)
+![Elbow Method and Silhouette Score](../Visualizations/EDA_and_Feature_Engineering_Plots/feature_importance.png)
 
 **K = 4** was chosen — not purely from where the elbow bends, but with an explicit business
 reason: this dataset is dominated by one-time buyers with a fairly narrow spending range, so a
@@ -448,7 +448,7 @@ the outcome toward or away from "churn."
 
 **6.1 — Feature importance (XGBoost gain-based)**
 
-![XGBoost Feature Importance](feature_importance.png)
+![XGBoost Feature Importance](../Visualizations/EDA_and_Feature_Engineering_Plots/feature_importance.png)
 
 **6.2 — SHAP summary plots for both the baseline and tuned models**
 
