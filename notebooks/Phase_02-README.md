@@ -524,6 +524,4 @@ they come in.
 | What actually drives churn? | Delivery speed & reliability, then freight cost, then spend — *not* review score alone | Business recommendations, SHAP dashboard |
 | Baseline vs. tuned model — which is "best"? | Depends on retention-action cost (recall vs. precision trade-off) | Deployment decision, not purely a modeling one |
 
-**Next phase:** Power BI dashboard build, consolidating the RFM segments, K-Means segments,
-churn scores, and SHAP-driven business recommendations from both phases into a single
-interactive view for stakeholders.
+**Next phase:** Power BI dashboard build and Buisness Quantification
