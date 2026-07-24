@@ -82,7 +82,7 @@ The dashboard has 4 pages, each answering a specific business question. A risk_t
 
 Business question: What does the overall business look like — customers, revenue, churn rate, and growth?
 
-![]()
+![Executive Summary](/dashboards&buisness_quantification/executive_summary.png)
 
 Visuals on this page:
 
@@ -102,6 +102,8 @@ Page summary: The business is healthy but plateaued. With 59% churn and a median
 ** Page 2 — Customer Segments
 
 Business question: Who are our customers, how much do they spend, and where does churn risk sit across segments?
+
+![Customer Segments](/dashboards&buisness_quantification/customer_segments.png)
 
 Visuals on this page:
 
@@ -139,6 +141,8 @@ Page summary: Active Casual Customers dominate by headcount, but High Value At-R
 
 ** Page 3 — Churn Risk Analysis: Who Is About to Leave?
 
+![Churn Analysis](/dashboards&buisness_quantification/churn_analysis.png)
+
 Business question: How is churn risk distributed, and how much revenue is at stake in the highest-risk tiers?
 
 Visuals on this page:
@@ -163,6 +167,8 @@ Critical Risk: 21K customers, R$2.33M — secondary target for a low-cost win-ba
 Page summary: The model has clearly segmented the customer base. With 53K customers in High or Critical Risk and R$8.26M in combined revenue at stake, the financial case for retention action is concrete and quantifiable.
 
 ** Page 4 — Cohort Retention Heatmap
+
+![Cohort Retention Heatmap](/dashboards&buisness_quantification/cohort_rentention_heatmap.png)
 
 Business question: For each cohort (customers who first bought in a given month), what % came back in subsequent months?
 
