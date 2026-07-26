@@ -129,6 +129,8 @@ Olist_E-Commerce_Analysis/
 ### Phase 1 — SQL Exploration (`PostgreSQL`)
 
 * Built relational database from 9 raw CSVs (`sql/Olist_dataset_ER-Diagram.jpeg`); identified `customer_id` vs `customer_unique_id` data quality issue.
+![Olist_Dataset_ER-Diagram](sql/Olist_dataset_ER-Diagram.jpeg)
+
 * **Funnel Analysis (`sql/Funnel_Analysis.sql`):** Evaluated order progression across statuses (delivered, canceled, unavailable, shipped).
 * **Revenue Concentration:** Top 25% of customers → ~60% of revenue (Pareto confirmed).
 * **Delivery Time Percentiles:** Median 10 days, p90 = 23 days — 1-in-10 customers wait significantly longer.
