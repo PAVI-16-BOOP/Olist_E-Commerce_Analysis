@@ -138,7 +138,7 @@ Olist_E-Commerce_Analysis/
 ![RFM Segmentation](Visualizations/rfm-segmentation.png)
 *Figure 1: Customer counts by RFM segment.*
 
-![Cohort Retention Heatmap]()
+![Cohort Retention Heatmap](Visualizations/cohort_retention_heatmap.png)
 *Figure 2: Cohort retention matrix.*
 
 ---
@@ -157,16 +157,16 @@ Olist_E-Commerce_Analysis/
 
 
 ![Review Score Distribution](Visualizations/distribution_of_review_score.png)
-*Figure 2: Breakdown of customer review scores.*
+*Figure 3: Breakdown of customer review scores.*
 
 ![Repeat Buyers by Review Group](Visualizations/repeat_buyers_by_review_group.png)
-*Figure 3: Repeat purchasing behavior mapped against review scores.*  -- no clear-direct pattern
+*Figure 4: Repeat purchasing behavior mapped against review scores.*  -- no clear-direct pattern
 
 ![Eda_Delivery_vs_Review](Visualizations/EDA_and_Feature_Engineering_Plots/eda_delivery_vs_review.png)
-*Figure 4: Delivery Time vs Review.*
+*Figure 5: Delivery Time vs Review.*
 
-![SHAP_feature-importance_plot](Visualizations/EDA_and_Feature_Engineering_Plots/SHAP Avg Importance Plot for the tuned model.png)
-*Figure 5: SHAP Feature-Importance Plot.*
+![SHAP feature-importance plot](Visualizations/EDA_and_Feature_Engineering_Plots/SHAP%20Avg%20Importance%20Plot.png)
+*Figure 6: SHAP Feature-Importance Plot.*
 
 ---
 
@@ -227,4 +227,6 @@ Each phase has its own detailed documentation and artifact directory:
 
 ---
 
-**Pavitra Bhargava** · *NIT Calicut + IIT Madras* · 2025
+**Pavitra Bhargava** · *B.Tech , NIT Calicut and BS in Data Science , IIT Madras* · 2026
+
+** Thanks to ChatGPT and Claude for assisting me with the code, concepts and structuring of analysis throughout this project ** 
