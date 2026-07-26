@@ -135,10 +135,10 @@ Olist_E-Commerce_Analysis/
 * **RFM Segmentation (`sql/RFM_Segmentationsql.sql`):** Champions (985), Loyal (33,090), At-Risk (37,344), Lost/Inactive (21,938).
 * **Cohort Retention (`sql/Cohort_Retention_Analysis.sql`):** Consistently low across all cohorts; business growth is entirely acquisition-driven.
 
-![RFM Segmentation](Visualizations/EDA_and_Feature_Engineering_Plots/rfm-segmentation.png)
+![RFM Segmentation](Visualizations/rfm-segmentation.png)
 *Figure 1: Customer counts by RFM segment.*
 
-![Cohort Retention Heatmap](Visualizations/EDA_and_Feature_Engineering_Plots/cohort_retention_heatmap.png)
+![Cohort Retention Heatmap]()
 *Figure 2: Cohort retention matrix.*
 
 ---
@@ -154,17 +154,19 @@ Olist_E-Commerce_Analysis/
 * **Final XGBoost Churn Model:** AUC 0.812 on hold-out · 0.858 ± 0.005 on 5-fold CV · Recall 86.5% (Model saved at `notebooks/xgb_churn_model.pkl`).
 * **SHAP Model Interpretability:** Confirmed delivery metrics (`avg_delivery_delta`, `avg_delivery_days`) as #1 and #2 predictors; review score ranked much lower once delivery features were included.
 
-![Delivery Times Distribution](Visualizations/EDA_and_Feature_Engineering_Plots/distribution_of_delivery_times.png)
-*Figure 3: Distribution of delivery duration across customer shipments.*
 
-![Review Score Distribution](Visualizations/EDA_and_Feature_Engineering_Plots/distribution_of_review_score.png)
-*Figure 4: Breakdown of customer review scores.*
 
-![Repeat Buyers by Review Group](Visualizations/EDA_and_Feature_Engineering_Plots/repeat_buyers_by_review_group.png)
-*Figure 5: Repeat purchasing behavior mapped against review scores.*
+![Review Score Distribution](Visualizations/distribution_of_review_score.png)
+*Figure 2: Breakdown of customer review scores.*
 
-![Category Revenue Breakdown](Visualizations/EDA_and_Feature_Engineering_Plots/rf-revenue-by-category.png)
-*Figure 6: Revenue distribution across product categories.*
+![Repeat Buyers by Review Group](Visualizations/repeat_buyers_by_review_group.png)
+*Figure 3: Repeat purchasing behavior mapped against review scores.*  -- no clear-direct pattern
+
+![Eda_Delivery_vs_Review](Visualizations/EDA_and_Feature_Engineering_Plots/eda_delivery_vs_review.png)
+*Figure 4: Delivery Time vs Review.*
+
+![SHAP_feature-importance_plot](Visualizations/EDA_and_Feature_Engineering_Plots/SHAP Avg Importance Plot for the tuned model.png)
+*Figure 5: SHAP Feature-Importance Plot.*
 
 ---
 
