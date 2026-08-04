@@ -428,9 +428,66 @@ with the business cost structure in mind, not just chasing the highest AUC numbe
   signals either changing customer behavior or model drift.
 
 ### How this feeds into the next phase
-Both the feature importances and the saved model (`xgb_churn_model.pkl`) feed directly into
+Both the feature importances and saved calibrated deployment model (`xgb_churn_model_calibrated.pkl`) feed directly into
 Section 6's SHAP interpretation — which explains not just *which* customers will churn, but
 *why*, at both the population and individual-customer level.
+
+
+**Section 5.5: Probability Calibration for Business Deployment**
+
+**File:** `CHURN_MODEL_and_SHAP.ipynb`
+
+### What problem this section answers
+The baseline XGBoost model produced strong ranking performance (AUC-ROC ≈ 0.81), but raw model confidence scores are not naturally guaranteed to represent true probability percentages. Since every downstream business output—risk tiers, revenue-at-risk estimates, retention campaign ROI calculations, the Power BI dashboard, and the Streamlit web application—relies directly on probability thresholds, the model's outputs required calibration before deployment.
+
+### What was done
+The final baseline XGBoost model was calibrated using **Isotonic Regression** via `CalibratedClassifierCV`. Rather than retraining the classifier from scratch, calibration fits a monotonic mapping function from the model's raw output scores to empirical probabilities that closely match real-world churn frequencies.
+
+Because no separate validation dataset was available, the original held-out test set was split into:
+1. **Calibration set:** used strictly to learn the monotonic probability mapping function.
+2. **Evaluation set:** used strictly to measure the true performance impact of calibration.
+
+```python
+from sklearn.calibration import CalibratedClassifierCV
+
+calibrated_xgb = CalibratedClassifierCV(
+    estimator=xgb_final,
+    method="isotonic",
+    cv="prefit"
+)
+```
+*Note: `cv="prefit"` ensures that the pre-trained XGBoost weights remain untouched while only the probability mapping is learned.*
+
+### Results
+
+| Metric | Before Calibration | After Calibration |
+| :--- | :---: | :---: |
+| **AUC-ROC** | 0.8078 | **0.8078** |
+| **Brier Score** | 0.1737 | **0.1732** |
+| **Probability Standard Deviation** | 0.2452 | **0.2761** |
+
+### Key Findings
+
+* **Ranking power was fully preserved:** AUC remained identical before and after calibration, confirming that the underlying classifier's ability to rank high-risk customers above low-risk ones was not degraded.
+* **Probability error decreased:** The lower Brier Score indicates that the predicted probability values shifted significantly closer to actual observed churn rates.
+* **Better risk-tier separation:** The increased probability standard deviation (0.2452 → 0.2761) created a wider, more decisive spread between Low, Medium, High, and Critical Risk tiers.
+* **Trustworthy business thresholds:** Calibration ensures that fixed operational cutoffs (e.g., 0.30, 0.60, and 0.80 probability thresholds) represent true financial probabilities rather than uncalibrated model scores.
+
+### Business Interpretation
+
+Calibration does not make a model better at ranking churners—it makes the **probabilities themselves an accurate reflection of reality**. This distinction is critical because the business is not simply running a binary classification script; it is calculating financial figures:
+
+* Quantifying exact **revenue at risk** across segments.
+* Projecting **retention campaign ROI** and break-even points.
+* Segmenting customers into actionable **risk tiers**.
+* Driving core executive KPIs on the **Power BI dashboard**.
+* Serving real-time inference in the **Streamlit web deployment**.
+
+All of these downstream operations depend heavily on well-calibrated probabilities rather than raw model confidence scores.
+
+### How this feeds into the next phase
+
+The calibrated deployment model (`xgb_churn_model_calibrated.pkl`) serves as the single source of truth for all remaining project phases—scoring the entire customer base, defining operational risk tiers, quantifying lost revenue, populating the interactive Power BI dashboard, and powering live inference in Streamlit.
 
 ---
 
@@ -508,7 +565,7 @@ level confirmation of it.
 ### How this feeds into the next phase
 The SHAP-confirmed feature importances (`avg_delivery_delta`, `avg_delivery_days`,
 `avg_freight_ratio`) become the headline metrics for the Power BI churn-risk dashboard page
-(Phase 4), and the model itself (`xgb_churn_model.pkl`) can be used to score new customers as
+(Phase 4), and calibrated deployment model (`xgb_churn_model_calibrated.pkl`) can be used to score new customers as
 they come in.
 
 ---
