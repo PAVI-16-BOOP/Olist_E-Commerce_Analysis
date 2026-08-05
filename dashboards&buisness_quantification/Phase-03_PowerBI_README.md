@@ -5,44 +5,49 @@ This folder covers the final two deliverables of the project:
 
 Business Quantification — translating the churn model's predictions into actual revenue numbers and campaign ROI
 Power BI Dashboard — a 4-page interactive dashboard that brings together everything from the SQL phase, Python EDA, segmentation, and churn model into one place any business stakeholder can explore
+
 ### Part 1: Business Quantification
 
 File: Business_Quantification.ipynb
-Inputs: customer_features_final.csv, xgb_churn_model.pkl
+Inputs: customer_features_final.csv, xgb_churn_model_calibrated.pkl
 
 What this notebook does
 
-After the churn model assigns every customer a churn probability score, the natural next question is: what does this actually cost the business? This notebook loads the saved model, scores all 93,350 customers, and turns those predictions into revenue and ROI numbers.
+After the churn model assigns every customer a churn probability score, the natural next question is: what does this actually cost the business? This notebook loads the saved model — now a calibrated version (CalibratedClassifierCV wrapping the XGBoost classifier) for more reliable probability estimates — scores all 93,350 customers, and turns those predictions into revenue and ROI numbers.
 
 Risk Tier Breakdown
 
 I divided all customers into 4 risk tiers based on their predicted churn probability:
 
 Risk Tier	Probability Range	Customer Count
-Low Risk	0 – 0.30	14,143
-Medium Risk	0.30 – 0.60	26,983
-High Risk	0.60 – 0.80	31,588
-Critical Risk	0.80 – 1.00	20,636
 
-Over half the customer base (52,224 customers) sits in High or Critical Risk — consistent with the ~59% churn rate found in the SQL phase.
+Low Risk	0 – 0.30	  19,402
+
+Medium Risk	0.30 – 0.60 	19,041
+
+High Risk	0.60 – 0.80	   30,200
+
+Critical Risk	0.80 – 1.00  	24,707
+
+Over half the customer base (54,907 customers) sits in High or Critical Risk — consistent with the ~59% churn rate found in the SQL phase. Calibration shifted some mass from High Risk into Critical Risk compared to the earlier uncalibrated run, giving a more conservative (and more trustworthy) read on who's truly at the edge of churning.
 
 Revenue at Risk
 
 I focused the campaign on High Risk customers (0.60–0.80) rather than Critical Risk because:
 
-High Risk customers have higher average spend (R$188 vs R$113) — better ROI to retain them
+High Risk customers have higher average spend (R$189 vs R$117) — better ROI to retain them
 Critical Risk customers are often already fully disengaged — harder and more expensive to win back
 
 #### Key numbers for the High Risk segment:
 
 * Metric	Value
-Customers at high churn risk	31,588
-Total historical spend	R$5,927,427
-Average order value	R$184
-Avg orders per customer	1.025 (almost all one-time buyers)
-Estimated annual revenue at risk	R$5,956,799
+Customers at high churn risk	30,200
+Total historical spend	R$5,808,158
+Average order value	R$189
+Avg orders per customer	1.024 (almost all one-time buyers)
+Estimated annual revenue at risk	R$5,836,081
 
-The 1.025 average orders figure is pulled directly from the data (high_risk['total_orders'].mean()), not assumed — making the revenue-at-risk estimate grounded in real numbers.
+The 1.024 average orders figure is pulled directly from the data (high_risk['total_orders'].sum() / len(high_risk)), not assumed — making the revenue-at-risk estimate grounded in real numbers.
 
 * Retention Campaign Scenario
 
@@ -53,24 +58,24 @@ The 1.025 average orders figure is pulled directly from the data (high_risk['tot
 
 -Campaign cost per customer	R$10	Email + automated discount voucher
 
--Avg order value	R$184	Segment average from high_risk
+-Avg order value	R$189	Segment average from high_risk
 
--Expected orders/customer	1.025	Directly from segment data
+-Expected orders/customer	1.024	Directly from segment data
 
 * Results:
 
 Metric	Value:
 
--Customers retained	3,158
+-Customers retained	3,020
 
--Revenue recovered	R$595,680
+-Revenue recovered	R$583,608
 
--Campaign cost	R$315,880
+-Campaign cost	R$302,000
 
--Campaign ROI	89%
+-Campaign ROI	93%
 
--For every R$1 spent on outreach, the business gets back R$1.89. The campaign breaks even at a retention rate of ~5.5%.
-the 10% retention rate is an assumption. The real number depends entirely on offer quality and targeting. I used 10% (not the commonly cited 15%) specifically because this platform's customers are predominantly one-time buyers — it's harder to bring someone back when they only bought once.
+-For every R$1 spent on outreach, the business gets back R$1.93. The campaign breaks even at a retention rate of ~5.2%.
+the 10% retention rate is an assumption. The real number depends entirely on offer quality and targeting. I used 10% specifically because this platform's customers are predominantly one-time buyers — it's harder to bring someone back when they only bought once.
 
 ### Part 2: Power BI Dashboard
 
