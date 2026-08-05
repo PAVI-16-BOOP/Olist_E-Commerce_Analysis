@@ -10,6 +10,7 @@ Olist is Brazil's largest e-commerce marketplace. Between 2016 and 2018, it proc
 This project builds a complete customer intelligence system from scratch — starting from raw CSVs, working through SQL exploration, Python feature engineering, unsupervised segmentation, supervised churn prediction with SHAP interpretation, and ending with a Power BI dashboard and a quantified retention campaign strategy.
 
 ---
+##[🚀🚀 Open the Olist Commerce Analysis App](https://oliste-commerceanalysis-cmneqrcgqwhd99abn5z7lr.streamlit.app/)
 
 ## Dataset
 
