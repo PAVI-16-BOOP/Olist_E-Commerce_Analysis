@@ -141,7 +141,7 @@ Page summary: Active Casual Customers dominate by headcount, but High Value At-R
 
 ** Page 3 — Churn Risk Analysis: Who Is About to Leave?
 
-![Churn Analysis](/dashboards&buisness_quantification/churn_analysis.png)
+![Churn Analysis](/dashboards&buisness_quantification/churn_dashboard.png)
 
 Business question: How is churn risk distributed, and how much revenue is at stake in the highest-risk tiers?
 
