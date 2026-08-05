@@ -7,7 +7,9 @@
 
 This report summarises findings from a full analysis of Olist's Brazilian e-commerce platform, covering **93,350 customers** and **99,441 orders** placed between September 2016 and October 2018. The platform has a strong fulfillment record (97% of orders delivered successfully) and grew revenue from virtually zero to **R\$1.15M per month** within its first year — but that growth has since plateaued. 
 
-The core problem is retention: **59% of customers are classified as churned**, meaning they have not returned for a purchase in over 180 days. An estimated **R\$5.96M in annual revenue** sits with High-Risk customers who are likely to leave. A targeted retention campaign focused on this group is estimated to recover **R\$595,680 in revenue** at an **ROI of 89%**.
+The core problem is retention: **59% of customers are classified as churned**, meaning they have not returned for a purchase in over 180 days. An estimated **R\$5.84M in annual revenue** sits with High-Risk customers who are likely to leave. A targeted retention campaign focused on this group is estimated to recover **R\$583,608 in revenue** at an **ROI of 93%**.
+
+
 
 > **Key Takeaway:** Churn on this platform is driven by **delivery experience**, not product satisfaction. Customers who waited longer for delivery — or paid more for shipping relative to their order — are measurably less likely to return, regardless of what they bought. Fixing delivery is the most direct lever the business has.
 
@@ -28,9 +30,11 @@ This concentration matters because it means that losing a small number of high-v
 Using a 180-day inactivity threshold, **59% of the customer base is classified as churned**. This isn't surprising given the underlying behaviour: only **3.5% of customers** (roughly 3,345 out of 96,000) ever placed more than one order. For most customers, this platform is a one-time purchase destination, not a recurring shopping habit.
 
 **Breakdown by risk level:**
-* **31,588 High-Risk customers** (churn probability 60–80%) hold **R\$5.93M** in historical spend.
-* **20,636 Critical-Risk customers** (churn probability >80%) hold **R\$2.33M** in historical spend.
-* **Combined:** These two groups represent **R\$8.26M in at-risk revenue** — more than half of the platform's total.
+* **30,200 High-Risk customers** (churn probability 60–80%) hold **R\$5.81M** in historical spend.
+* **24,707 Critical-Risk customers** (churn probability >80%) hold **R\$2.99M** in historical spend.
+* **Combined:** These two groups represent **R\$8.80M in at-risk revenue** — more than half of the platform's total.
+
+High-Risk customers are the more valuable retention target: their average order value (**R\$189**) is significantly higher than Critical-Risk customers (**R\$117**), and they are not yet fully disengaged — making them easier and cheaper to win back.
 
 High-Risk customers are the more valuable retention target: their average order value (**R\$184**) is significantly higher than Critical-Risk customers (**R\$113**), and they are not yet fully disengaged — making them easier and cheaper to win back.
 
@@ -123,17 +127,17 @@ Campaign targets the **31,588 High-Risk customers** (churn probability 60–80%)
 
 | Metric | Value |
 | :--- | :--- |
-| **Customers targeted** | 31,588 |
+| **Customers targeted** | 30,200 |
 | **Assumed retention rate** | 10% |
-| **Customers retained** | 3,158 |
-| **Average order value** | R\$184 |
-| **Revenue recovered** | **R\$595,680** |
-| **Campaign cost** (R\$10/customer) | R\$315,880 |
-| **Net revenue gain** | **R\$279,800** |
-| **Campaign ROI** | **89%** |
+| **Customers retained** | 3,020 |
+| **Average order value** | R\$189 |
+| **Revenue recovered** | **R\$583,603** |
+| **Campaign cost** (R\$10/customer) | R\$302,000 |
+| **Net revenue gain** | **R\$281,608** |
+| **Campaign ROI** | **93%** |
 
 > **ROI Notes:**
-> * The campaign **breaks even at a retention rate of just 5.5%**.
+> * The campaign **breaks even at a retention rate of just 5.2%**.
 > * The 10% retention rate used here is deliberately conservative — these are predominantly one-time buyers, and a 10% re-engagement rate is realistic for a well-executed email + discount campaign.
 > * If outreach quality improves (personalisation, better timing, stronger offer), ROI scales directly with retention rate.
 
