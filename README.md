@@ -31,8 +31,8 @@ This project builds a complete customer intelligence system from scratch — sta
 | **Top 25% of Customers → Revenue Share** | ~60% of total revenue |
 | **Best Model (XGBoost) AUC-ROC** | 0.812 (hold-out) · 0.858 ± 0.005 (5-fold CV) |
 | **#1 Churn Driver (SHAP)** | `avg_delivery_delta` — actual vs. promised delivery time |
-| **High-Risk Customers** | 31,588 customers · R\$5.93M revenue at risk |
-| **Retention Campaign ROI (10% retention)** | **89%** |
+| **High-Risk Customers** | 30,200 customers · R\$5.93M revenue at risk |
+| **Retention Campaign ROI (10% retention)** | **93%** |
 
 ---
 
@@ -41,7 +41,7 @@ This project builds a complete customer intelligence system from scratch — sta
 * **Revenue is dangerously concentrated:** The top 25% of customers generate ~60% of revenue. Losing a handful of high-value customers has an outsized impact — a broad, undifferentiated marketing strategy misses this entirely.
 * **This platform has a conversion problem, not a satisfaction problem:** 59% of customers churned, and 94% of customers placed only one order ever. The dominant challenge isn't keeping happy customers loyal — it's converting good one-time buyers into second-time buyers before they drift away.
 * **Delivery experience, not review score, is the root cause of churn:** 1-star customers waited an average of 20.9 days for delivery vs. 10.2 days for 5-star customers. SHAP analysis confirmed `avg_delivery_delta` and `avg_delivery_days` as the top two churn predictors — review score ranked much lower because it's largely downstream of delivery, not an independent driver.
-* **R\$8.26M in revenue sits in the hands of High and Critical-Risk customers:** A targeted campaign at the High-Risk group alone (31,588 customers) is estimated to recover R\$595,680 at a campaign cost of R\$315,880 — an **89% ROI**, breaking even at a retention rate as low as 5.5%.
+* * **R\$8.80M in revenue sits in the hands of High and Critical-Risk customers:** A targeted campaign at the High-Risk group alone (30,200 customers) is estimated to recover R\$583,608 at a campaign cost of R\$302,000 — a **93% ROI**, breaking even at a retention rate as low as 5.2%.
 
 ---
 
@@ -51,7 +51,7 @@ This project builds a complete customer intelligence system from scratch — sta
 | :--- | :--- | :--- |
 | **Data Storage & SQL** | PostgreSQL, DBeaver | Relational database modeling & analytical queries |
 | **Data Processing** | Python, pandas, NumPy | Data cleaning, ETL, and feature engineering |
-| **Machine Learning** | scikit-learn, XGBoost | Customer segmentation, churn modeling, and validation |
+| **Machine Learning** |  scikit-learn (CalibratedClassifierCV), XGBoost | Customer segmentation, churn modeling, and validation |
 | **Model Interpretability** | SHAP | Feature attribution & dependency analysis |
 | **Visualisation** | matplotlib, seaborn | Exploratory data analysis & statistical plotting |
 | **Business Dashboard** | Power BI Desktop | Interactive reporting, KPI tracking & scenario modeling |
@@ -105,8 +105,8 @@ Olist_E-Commerce_Analysis/
 │   ├── Phase_02-README.md
 │   ├── Python_Phase_02_Segmentation_Analysis_KMeans_and PCA.ipynb
 │   ├── SQL_Visualizations.ipynb
-│   ├── customer_features_final.csv
-│   └── xgb_churn_model.pkl
+│   ├── customer_features_final_calibrated.csv
+│   └── xgb_churn_model_calibrated.pkl
 │
 ├── sql/
 │   ├── Basic_Exploration_Queries.sql
@@ -175,12 +175,11 @@ Olist_E-Commerce_Analysis/
 ### Phase 3 — Power BI Dashboard & Business Quantification
 *(`Power BI` · `Python`)*
 
-* **Execution (`dashboards&buisness_quantification/Buisness_Quantification.ipynb`):** Scored all 93,350 customers with the saved XGBoost model (`notebooks/xgb_churn_model.pkl`) to generate individual churn probabilities (`dashboards&buisness_quantification/customer_features_with_segments.csv`).
+* **Execution (`dashboards&buisness_quantification/Buisness_Quantification.ipynb`):** Scored all 93,350 customers with the saved calibrated XGBoost model (`notebooks/xgb_churn_model_calibrated.pkl`) to generate individual, probability-calibrated churn scores (`dashboards&buisness_quantification/customer_features_final_calibrated.csv`).
 * Divided customers into 4 risk tiers (Low / Medium / High / Critical) by probability threshold (`dashboards&buisness_quantification/churn_risk_summary.csv`).
-* **Quantified Revenue at Risk:** High-Risk segment = R\$5.93M; Critical-Risk = R\$2.33M.
-* **Modelled Retention Campaign:** 31,588 customers, 10% retention rate, R\$315,880 cost → R\$595,680 revenue recovered · **89% ROI**.
+* **Quantified Revenue at Risk:** High-Risk segment = R\$5.81M; Critical-Risk = R\$2.99M.
+* **Modelled Retention Campaign:** 30,200 customers, 10% retention rate, R\$302,000 cost → R\$583,608 revenue recovered · **93% ROI**.
 * **Power BI Dashboard:** 4 interactive pages with `risk_tier` and `segment` slicers for full cross-filtering flexibility.
-
 ---
 
 ## Dashboard Preview
