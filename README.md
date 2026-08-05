@@ -11,6 +11,13 @@ This project builds a complete customer intelligence system from scratch — sta
 
 ---
 
+## Dataset
+
+**[Olist Brazilian E-Commerce Public Dataset — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)**  
+9 relational tables · 99,441 orders · 96,096 unique customers · Sep 2016 – Oct 2018
+
+---
+
 ## Core Business Problems Addressed
 
 * **No Customer Segmentation:** Every customer was being treated identically regardless of value or behavior.
@@ -209,12 +216,45 @@ The dashboard consists of 4 dynamic interactive pages:
 
 ---
 
-## Dataset
+## Model Limitations & Honest Assessment
 
-**[Olist Brazilian E-Commerce Public Dataset — Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)**  
-9 relational tables · 99,441 orders · 96,096 unique customers · Sep 2016 – Oct 2018
+### Why predictions compress toward the 30–60% range
 
----
+The churn predictor rarely pushes predictions toward extreme values (0–20% or 80–100%).
+This is a fundamental data limitation, not a modeling failure, explained by three factors:
+
+**1. Feature distributions are nearly identical for churned and non-churned customers**
+The strongest SHAP feature (`avg_delivery_delta`) has a mean of -11.0 days for active customers
+and -11.4 days for churned customers — a difference of less than half a day. When the key features
+barely differ between the two groups, the model cannot confidently push predictions to extremes.
+This is the primary reason even the worst-case customer profile in the predictor tab scores ~41–55%
+rather than 90%+.
+
+**2. Recency was intentionally removed to prevent label leakage**
+The 180-day churn label is defined entirely from recency (days since last purchase). Including
+recency as a feature would give the model the answer directly — an AUC ≈ 1.0 that is
+statistically meaningless. After removing it (and the related `avg_days_between_orders` leakage
+for one-time buyers), the model predicts churn from second-order signals only: delivery quality,
+spend patterns, and category type. In a real production deployment, recency would be available
+as a live, non-leaky input since you'd score customers at a fixed weekly cadence rather than
+defining the churn label from the same time window.
+
+**3. High base churn rate creates a high prior**
+With 59% of customers classified as churned, the model's baseline probability before seeing
+any features is already near 0.59. The remaining features shift this baseline by smaller
+amounts than you might expect, because they don't separate churned from non-churned customers
+as cleanly as recency would.
+
+### What this means in practice
+
+The model is **discriminative** (AUC 0.812 — it correctly ranks higher-risk customers above
+lower-risk ones) but not **perfectly calibrated** (the raw probabilities are not precise
+absolute values). For the primary use case — ranking 93,350 customers to identify the top
+30,000 to target for a retention campaign — ranking quality is what matters, and AUC is
+the right metric for that. The predictor tab demonstrates the model's learned feature
+relationships directionally: delivery lateness raises risk, early delivery lowers it,
+high freight ratios raise it. The specific probability values should be interpreted as
+relative scores, not precise estimates.
 
 ## Phase READMEs & Documentation Links
 
