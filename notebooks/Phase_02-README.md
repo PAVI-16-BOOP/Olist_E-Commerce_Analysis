@@ -433,30 +433,33 @@ Section 6's SHAP interpretation — which explains not just *which* customers wi
 *why*, at both the population and individual-customer level.
 
 
-**Section 5.5: Probability Calibration for Business Deployment**
+## Section 5.5: Probability Calibration for Business Deployment
 
 **File:** `CHURN_MODEL_and_SHAP.ipynb`
 
 ### What problem this section answers
-The baseline XGBoost model produced strong ranking performance (AUC-ROC ≈ 0.81), but raw model confidence scores are not naturally guaranteed to represent true probability percentages. Since every downstream business output—risk tiers, revenue-at-risk estimates, retention campaign ROI calculations, the Power BI dashboard, and the Streamlit web application—relies directly on probability thresholds, the model's outputs required calibration before deployment.
+The baseline XGBoost model produced strong ranking performance ($\text{AUC-ROC} \approx 0.81$), but raw model confidence scores are not automatically guaranteed to represent reliable probability estimates. Since downstream business analysis relies directly on these probabilities to define risk tiers, quantify revenue at risk, estimate retention campaign ROI, populate the Power BI dashboard, and generate predictions in the Streamlit application, the model probabilities required calibration before deployment.
 
 ### What was done
-The final baseline XGBoost model was calibrated using **Isotonic Regression** via `CalibratedClassifierCV`. Rather than retraining the classifier from scratch, calibration fits a monotonic mapping function from the model's raw output scores to empirical probabilities that closely match real-world churn frequencies.
+The final XGBoost model was calibrated using Sigmoid Calibration via `CalibratedClassifierCV`.
 
-Because no separate validation dataset was available, the original held-out test set was split into:
-1. **Calibration set:** used strictly to learn the monotonic probability mapping function.
-2. **Evaluation set:** used strictly to measure the true performance impact of calibration.
+Sigmoid calibration learns a smooth mapping between original XGBoost scores and observed churn outcomes. Unlike retraining the classifier itself, the underlying XGBoost model remains unchanged; the calibration step merely adjusts how raw output scores map to operational probabilities.
+
+Because no separate validation dataset was available, the original held-out test set was split into two independent parts:
+* **Calibration set:** Used exclusively to learn the probability mapping.
+* **Evaluation set:** Used independently to measure the precise impact of calibration.
 
 ```python
 from sklearn.calibration import CalibratedClassifierCV
 
-calibrated_xgb = CalibratedClassifierCV(
+calibrated_model = CalibratedClassifierCV(
     estimator=xgb_final,
-    method="isotonic",
-    cv="prefit"
+    method='sigmoid',
+    cv='prefit'
 )
+calibrated_model.fit(X_cal, y_cal)
 ```
-*Note: `cv="prefit"` ensures that the pre-trained XGBoost weights remain untouched while only the probability mapping is learned.*
+*Note: setting `cv="prefit"` ensures that the pre-trained XGBoost weights remain untouched while only the probability mapping is learned.*
 
 ### Results
 
