@@ -272,7 +272,7 @@ units.
 Both the **elbow method** (inertia vs. K) and **silhouette score** were computed for K = 2
 through 10.
 
-![Elbow Method and Silhouette Score](../Visualizations/EDA_and_Feature_Engineering_Plots/feature_importance.png)
+![Elbow Method and Silhouette Score](../Visualizations/Elbow_Method_and%20_Silhoutte_score.png)
 
 **K = 4** was chosen — not purely from where the elbow bends, but with an explicit business
 reason: this dataset is dominated by one-time buyers with a fairly narrow spending range, so a
