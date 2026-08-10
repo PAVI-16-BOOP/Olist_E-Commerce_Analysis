@@ -21,13 +21,13 @@ I divided all customers into 4 risk tiers based on their predicted churn probabi
 
 Risk Tier	Probability Range	Customer Count
 
-Low Risk	0 – 0.30	  19,402
+Low Risk	0 – 0.30	  19,311
 
-Medium Risk	0.30 – 0.60 	19,041
+Medium Risk	0.30 – 0.60 	20,263
 
-High Risk	0.60 – 0.80	   30,200
+High Risk	0.60 – 0.80	   25,391
 
-Critical Risk	0.80 – 1.00  	24,707
+Critical Risk	0.80 – 1.00  	28,385
 
 Over half the customer base (54,907 customers) sits in High or Critical Risk — consistent with the ~59% churn rate found in the SQL phase. Calibration shifted some mass from High Risk into Critical Risk compared to the earlier uncalibrated run, giving a more conservative (and more trustworthy) read on who's truly at the edge of churning.
 
@@ -41,13 +41,13 @@ Critical Risk customers are often already fully disengaged — harder and more e
 #### Key numbers for the High Risk segment:
 
 * Metric	Value
-Customers at high churn risk	30,200
-Total historical spend	R$5,808,158
-Average order value	R$189
+Customers at high churn risk	25,391
+Total historical spend	R$4,915,189
+Average order value	R$94
 Avg orders per customer	1.024 (almost all one-time buyers)
-Estimated annual revenue at risk	R$5,836,081
+Estimated annual revenue at risk	 R$4,939,722
 
-The 1.024 average orders figure is pulled directly from the data (high_risk['total_orders'].sum() / len(high_risk)), not assumed — making the revenue-at-risk estimate grounded in real numbers.
+The 1.024 average orders figure is pulled directly from the data (high_risk["total_orders"].sum()/len(high_risk)), not assumed — making the revenue-at-risk estimate grounded in real numbers.
 
 * Retention Campaign Scenario
 
@@ -66,20 +66,20 @@ The 1.024 average orders figure is pulled directly from the data (high_risk['tot
 
 Metric	Value:
 
--Customers retained	3,020
+-Customers retained	2,539
 
--Revenue recovered	R$583,608
+-Revenue recovered	R$493,972
 
--Campaign cost	R$302,000
+-Campaign cost	: R$253,910
 
--Campaign ROI	93%
+-Campaign ROI	95%
 
--For every R$1 spent on outreach, the business gets back R$1.93. The campaign breaks even at a retention rate of ~5.2%.
-the 10% retention rate is an assumption. The real number depends entirely on offer quality and targeting. I used 10% specifically because this platform's customers are predominantly one-time buyers — it's harder to bring someone back when they only bought once.
+-For every R$1 spent on outreach, the business gets back R$1.95.The campaign breaks even at approximately a 5.1% retention rate.
+The 10% retention rate is an assumption. The real number depends entirely on offer quality and targeting. I used 10% specifically because this platform's customers are predominantly one-time buyers — it's harder to bring someone back when they only bought once.
 
 ### Part 2: Power BI Dashboard
 
-#### Link:  https://app.powerbi.com/groups/6dd1d3b8-cdac-49cc-a583-fabf3976f13b/reports/4014130b-a980-410e-b78b-3e885a289194/046b7472e98a95da526b?experience=power-bi
+#### Link: 
 
 The dashboard has 4 pages, each answering a specific business question. A risk_tier slicer and a segment slicer run across pages 2 and 3 for interactive drill-down.
 
@@ -108,68 +108,71 @@ Page summary: The business is healthy but plateaued. With 59% churn and a median
 
 Business question: Who are our customers, how much do they spend, and where does churn risk sit across segments?
 
-![Customer Segments](/dashboards&buisness_quantification/customer_segments.png)
+![Customer Segments](/dashboards&buisness_quantification/Customer%20Segment%20Page.png)
 
 Visuals on this page:
-
-Count of Customers by Segment (bar chart)
-Sum of Total Spend by Segment (pie chart)
-Customer Spend vs Churn Risk (scatter plot) — coloured by risk tier
-Total Spend by Risk Tier (bar chart)
-
+-Count of Customers by Segment (bar chart)
+-Sum of Total Spend by Segment (pie chart)
+-Customer Spend vs Churn Risk (scatter plot) — coloured by risk tier
+-Total Spend by Risk Tier (bar chart)
 What each visual shows:
 
 Customer count bar chart:
 
-Active Casual Customers are by far the largest group (~50K customers)
-Lost Customers are second (~38K) — a huge portion of the base is already gone
-Loyal Repeat and High Value At-Risk are tiny in headcount (~2.7K–2.8K each) but carry disproportionate revenue weight
+Active Casual Customers are by far the largest group (~51K customers)
+Lost Customers are second (~38K) — a huge portion of the customer base is already lost
+Loyal Repeat At-Risk and High Value At-Risk are much smaller groups (~3K and ~2K respectively), but carry disproportionate revenue weight
 
 Revenue pie chart:
 
-Active Casual: 44.12% — largest share by volume
-Lost Customers: 32.47% — already-lost revenue that should motivate retention investment
-High Value At-Risk: 18.2% — only 2.6% of customers but nearly a fifth of all revenue; highest priority to retain
-Loyal Repeat At-Risk: 5.21% — small but the only segment with proven repeat behaviour
+Active Casual: 44.12% — largest share of total revenue
+Lost Customers: 32.47% — a substantial amount of revenue is associated with customers who are already lost, highlighting the scale of the retention opportunity
+High Value At-Risk: 18.2% — only a small fraction of customers but nearly a fifth of total revenue; the highest-value segment to retain
+Loyal Repeat At-Risk: 5.21% — small in size but valuable because these customers have demonstrated repeat purchasing behaviour
 
 Scatter plot — Spend vs Churn Risk:
 
-Most customers cluster in the bottom-left (low spend, varied risk) — the mass market
-High-spend outliers exist at both low and high churn probability, meaning spend alone isn't enough to identify who to target — you need the churn model
-Critical Risk customers (light blue) are spread across all spend levels, confirming the model is picking up behavioural signals beyond just how much someone spent
+Most customers cluster toward the bottom of the chart (lower spend), across different churn probabilities — representing the mass market
+High-spend outliers exist at both low and high churn probabilities, showing that spend alone is not sufficient to identify customers at risk
+Critical Risk customers are distributed across different spending levels, reinforcing that the churn model is capturing behavioural signals beyond simply how much a customer spends
+The clear separation of customers across churn-probability ranges also shows how the calibrated churn score can be used alongside spending to identify customers requiring attention
 
 Risk Tier revenue bar chart:
 
-High Risk holds the most total revenue (~R$5.9M), more than Critical Risk (~R$2.3M) — explaining the campaign focus on High Risk in the quantification notebook
+High Risk holds the largest total revenue at approximately R$4.9M
+Medium Risk follows with approximately R$4.0M
+Critical Risk accounts for approximately R$3.7M
+Low Risk accounts for approximately R$2.9M
+The concentration of revenue across the High, Medium, and Critical Risk tiers shows that a significant amount of customer value is exposed to potential churn, supporting targeted retention campaigns rather than relying only on overall customer counts
+Page summary:
 
-Page summary: Active Casual Customers dominate by headcount, but High Value At-Risk customers are where the revenue leverage is. The scatter plot makes clear that targeting purely by spend would miss many of the model's most important predictions.
+Active Casual Customers dominate by headcount and revenue share, but the smaller High Value At-Risk segment represents significant revenue leverage. The scatter plot shows that spending alone cannot identify churn risk, while the risk-tier analysis demonstrates that substantial revenue is distributed among customers with elevated churn probabilities. This supports using the calibrated churn model to prioritize retention efforts based on both customer behaviour and financial value.
 
 ** Page 3 — Churn Risk Analysis: Who Is About to Leave?
 
-![Churn Analysis](/dashboards&buisness_quantification/churn_dashboard.png)
+![Churn Analysis](/dashboards&buisness_quantification/Churn%20Risk%20and%20Revenue%20At%20Risk%20Page.png)
 
 Business question: How is churn risk distributed, and how much revenue is at stake in the highest-risk tiers?
 
 Visuals on this page:
 
-Number of Customers by Churn Probability Score (histogram)
-Count of Customers by Risk Tier (pie chart)
-4 KPI cards: High Risk Revenue · High Risk Customers · Critical Risk Revenue · Critical Risk Customers
-Histogram interpretation guide (text box)
+-Number of Customers by Churn Probability Score (histogram)
+-Count of Customers by Risk Tier (pie chart)
+-4 KPI cards: High Risk Revenue · High Risk Customers · Critical Risk Revenue · Critical Risk Customers
+-Histogram interpretation guide (text box)
 
 What the histogram shows:
-
-The distribution rises steadily from left to right — customers are more likely to be in higher-risk bins than lower ones
-Peak bin: 0.7–0.8 (16,392K customers) — the model's most confidently predicted at-risk group
-There's a dip at 0.1–0.2 (3,845K) vs the 0.0 bin (5,171K), suggesting a clean separation between the genuinely low-risk group and everyone else
-The overall shape — low counts at low probabilities, rising sharply from 0.5 onwards — confirms the model is making confident, decisive predictions rather than sitting uncertainly around 0.5 for most customers. This is a healthy sign for a churn model.
-
+The distribution is relatively balanced at lower probabilities but rises substantially from 0.5 onwards, indicating that a large portion of customers receive relatively high predicted churn probabilities.
+Peak bin: 0.7–0.8 (~20.5K customers) — this is the largest probability range, showing that the model identifies a particularly large group of customers with elevated churn risk.
+The 0.6–0.7 bin contains ~10.4K customers, followed by ~15.0K in the 0.7–0.8 bin and ~20.5K in the 0.8–0.9 bin, showing a strong concentration toward the higher-risk end of the distribution.
+The lowest-probability bins contain fewer customers than the higher-probability bins, with approximately 7.1K customers in the 0.0–0.1 range and 6.4K in the 0.1–0.2 range.
+The overall distribution shows that the calibrated model assigns substantially different probabilities across customers rather than concentrating most predictions around 0.5. This provides useful differentiation when prioritising customers for retention actions.
 KPI cards:
+High Risk: 25.39K customers, representing approximately R$4.92M in total spend — a major retention target
+Critical Risk: 28.0K customers, representing approximately R$3.66M in total spend — the highest-probability churn group and an important priority for intervention
+Page summary:
 
-High Risk: 32K customers, R$5.93M — primary retention target
-Critical Risk: 21K customers, R$2.33M — secondary target for a low-cost win-back
-
-Page summary: The model has clearly segmented the customer base. With 53K customers in High or Critical Risk and R$8.26M in combined revenue at stake, the financial case for retention action is concrete and quantifiable.
+The calibrated model clearly differentiates customers across the churn-probability spectrum, with a substantial concentration toward higher predicted churn probabilities. Approximately 53.4K customers fall into the High or Critical Risk tiers, representing around R$8.58M in combined customer spend. This provides a concrete basis for prioritising retention efforts, with the highest-probability customers requiring the most immediate attention.
 
 ** Page 4 — Cohort Retention Heatmap
 
@@ -186,11 +189,14 @@ Footnote explaining what the values represent
 How to read it: Each value is a retention percentage. Apr 2017 × Month 1 = 0.60 means 60% of customers who first bought in April 2017 made another purchase within 30 days.
 
 What the data shows:
+-Month 1 retention spans 0.23–0.69 across cohorts — a wide range suggesting that the first 30-day experience has been inconsistent across different time periods.
 
-Month 1 retention spans 0.23–0.69 across cohorts — a wide range suggesting the "first 30 days" experience is inconsistent across time periods
-Aug, Sep, Oct 2017 cohorts consistently show the highest Month 1 retention (0.69, 0.68, 0.69) — these months precede the platform's revenue peak (Page 1), suggesting better platform conditions during that period translated into better early retention
-Across all cohorts, retention drops sharply after Month 1 — most cohorts are below 0.30 by Month 3 and below 0.25 by Month 6
-Oct 2016 has sparse, noisy data — the platform was brand new and the cohort was tiny, so the occasional values that appear (0.31 at Month 6 and Month 9) are based on very few customers and shouldn't be over-interpreted
-Nov 2017 drops to just 0.05 by Month 9 — the weakest sustained late-period retention in the table. This was also the platform's largest cohort (~7,300 customers), which may have included many lower-intent buyers attracted by a high-traffic period
+-Aug, Sep, and Oct 2017 cohorts consistently show the highest Month 1 retention (0.69, 0.68, and 0.69). These months precede the platform's revenue peak, suggesting that the stronger operating conditions during this period were associated with better early retention.
 
-Page summary: Retention is universally low — the best the platform ever achieved was around 60–69% Month 1 retention (Aug–Oct 2017), and everything decays quickly after that. The table confirms the same story the SQL phase established: this business has been driven by acquisition, not retention, and that structural pattern is what the entire churn analysis in this project is designed to address.
+-Across cohorts, retention drops sharply after Month 1 — most cohorts fall below 0.30 by Month 3 and below 0.25 by Month 6. This confirms that the platform's main challenge is not simply acquiring customers, but converting first-time buyers into repeat customers.
+
+-Oct 2016 has sparse and noisy data — as one of the earliest cohorts, it contains relatively few customers, so isolated values such as 0.31 at Month 6 and Month 9 should not be over-interpreted.
+
+-Nov 2017 falls to just 0.05 by Month 9, representing the weakest sustained late-period retention in the table. This was also the platform's largest cohort (~7,300 customers), suggesting that high acquisition volume did not necessarily translate into long-term customer retention.
+
+Page summary: Retention is consistently weak over the long term. The strongest Month 1 retention reached around 69% in the Aug–Oct 2017 cohorts, but retention declines rapidly thereafter, with most cohorts falling below 30% within three months. The heatmap reinforces the earlier SQL finding that the platform has been driven heavily by acquisition rather than repeat purchasing. This provides the broader business context for the churn analysis: the calibrated model identifies which customers are most likely to leave, while the cohort analysis shows why retention itself is a structural business problem. Together with the revenue-at-risk and retention campaign analysis, the dashboard turns this retention problem into a measurable business opportunity
