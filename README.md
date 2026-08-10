@@ -219,7 +219,7 @@ The dashboard consists of 4 dynamic interactive pages:
 
 ## Model Limitations & Honest Assessment
 
-### Why predictions compress toward the 30–60% range
+### Why predictions compress toward the extremly narrow range
 
 The churn predictor rarely pushes predictions toward extreme values (0–20% or 80–100%).
 This is a fundamental data limitation, not a modeling failure, explained by three factors:
@@ -228,7 +228,7 @@ This is a fundamental data limitation, not a modeling failure, explained by thre
 The strongest SHAP feature (`avg_delivery_delta`) has a mean of -11.0 days for active customers
 and -11.4 days for churned customers — a difference of less than half a day. When the key features
 barely differ between the two groups, the model cannot confidently push predictions to extremes.
-This is the primary reason even the worst-case customer profile in the predictor tab scores ~41–55%
+This is the primary reason even the worst-case customer profile in the predictor tab scores very low 
 rather than 90%+.
 
 **2. Recency was intentionally removed to prevent label leakage**
@@ -240,11 +240,12 @@ spend patterns, and category type. In a real production deployment, recency woul
 as a live, non-leaky input since you'd score customers at a fixed weekly cadence rather than
 defining the churn label from the same time window.
 
-**3. High base churn rate creates a high prior**
-With 59% of customers classified as churned, the model's baseline probability before seeing
-any features is already near 0.59. The remaining features shift this baseline by smaller
-amounts than you might expect, because they don't separate churned from non-churned customers
-as cleanly as recency would.
+**3. The churn predictor demonstrates correct directional relationships b/w the features and the "churn risk" label  — delivery lateness increases risk, repeat buyers have lower risk,
+consumable category customers are safer — but absolute probability estimates are compressed toward the dataset's base churn rate (59%) because
+the key differentiating feature (recency) was correctly excluded to prevent label leakage.
+
+**4. The model works correctly as a ranking tool (AUC 0.812 — it correctly identifies who is relatively 
+higher risk) but should not be used for precise individual probability estimates with the current feature set.
 
 ### What this means in practice
 
