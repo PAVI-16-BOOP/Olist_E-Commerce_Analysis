@@ -79,7 +79,7 @@ The 10% retention rate is an assumption. The real number depends entirely on off
 
 ### Part 2: Power BI Dashboard
 
-#### Link: 
+#### **📊📈[Live Dashboard →](https://app.powerbi.com/groups/me/reports/a9ce3b40-7516-4ed0-93e9-ebc2a64fc279/dbbded99042636a4b3f4?experience=power-bi)**
 
 The dashboard has 4 pages, each answering a specific business question. A risk_tier slicer and a segment slicer run across pages 2 and 3 for interactive drill-down.
 
