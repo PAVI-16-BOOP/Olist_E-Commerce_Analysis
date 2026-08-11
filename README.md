@@ -192,7 +192,7 @@ Olist_E-Commerce_Analysis/
 
 ## Dashboard Preview
 
-🔗 **[Live Dashboard →](https://app.powerbi.com/groups/6dd1d3b8-cdac-49cc-a583-fabf3976f13b/reports/4014130b-a980-410e-b78b-3e885a289194/046b7472e98a95da526b?experience=power-bi)**
+🔗 **[Live Dashboard →](https://app.powerbi.com/groups/me/reports/a9ce3b40-7516-4ed0-93e9-ebc2a64fc279/dbbded99042636a4b3f4?experience=power-bi)**
 
 The dashboard consists of 4 dynamic interactive pages:
 
